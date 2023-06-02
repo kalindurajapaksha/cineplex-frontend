@@ -1,0 +1,4 @@
+.btn:disabled {
+  background: red;
+  color: white;
+}
