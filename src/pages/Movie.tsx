@@ -1,5 +1,4 @@
 import { Button, Col, Image, ListGroup, Row, Stack } from "react-bootstrap";
-import { useMovie } from "./MovieLayout";
 import { useState } from "react";
 import BookingModel from "../components/BookingModel";
 import { MovieDetails, Showtime } from "../App";
@@ -8,11 +7,12 @@ import { useLoaderData } from "react-router-dom";
 
 const Movie = () => {
   const { movieDetails } = useLoaderData() as { movieDetails: MovieDetails };
-  console.log("🚀 ~ file: Movie.tsx:11 ~ Movie ~ movieDetails:", movieDetails);
+
   const [selectedTime, setSelectedTime] = useState<Showtime>();
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [seatSelectionModelShow, setSeatSelectionModelShow] = useState(false);
   const [numberOfSeatsSelected, setNumberOfSeatsSelected] = useState(0);
+
   return (
     <>
       <Row>
@@ -65,6 +65,7 @@ const Movie = () => {
             }
           />
           <SeatSelectionModel
+            movieShowtimeId={selectedTime?.movieShowtimeid}
             numberOfSeatsSelected={numberOfSeatsSelected}
             setSeatSelectionModelShow={setSeatSelectionModelShow}
             seatSelectionModelShow={seatSelectionModelShow}

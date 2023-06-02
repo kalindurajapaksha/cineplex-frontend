@@ -36,6 +36,7 @@ export type Showtime = {
   id: string;
   label: string;
   unavailableSeats: number[];
+  movieShowtimeid: number;
 };
 
 function App() {

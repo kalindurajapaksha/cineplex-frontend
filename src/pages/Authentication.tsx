@@ -1,9 +1,4 @@
-import {
-  ActionFunction,
-  ActionFunctionArgs,
-  json,
-  redirect,
-} from "react-router-dom";
+import { ActionFunctionArgs, json, redirect } from "react-router-dom";
 import AuthForm from "../components/AuthForm";
 import jwtDecode from "jwt-decode";
 
@@ -45,7 +40,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     authData["firstName"] = data.get("firstName");
     authData["lastName"] = data.get("lastName");
   }
-  console.log(authData);
   const response = await fetch("http://localhost:8080/user/auth/" + mode, {
     method: "POST",
     headers: {

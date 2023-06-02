@@ -1,6 +1,10 @@
-import { Button, Col, Modal, Row, Stack, ToggleButton } from "react-bootstrap";
+import { Button, Modal, Row, ToggleButton } from "react-bootstrap";
 import classes from "./SeatSelectionModel.module.css";
 import { useState } from "react";
+import jwtDecode from "jwt-decode";
+import { getAuthToken } from "../util/auth";
+import { TokenData } from "../pages/Authentication";
+import { redirect } from "react-router-dom";
 
 type SeatSelectionModelProps = {
   numberOfSeatsSelected: number;
@@ -9,6 +13,7 @@ type SeatSelectionModelProps = {
   setBookingModalShow: (show: boolean) => void;
   unavailableSeats: number[];
   numberOfSeats: number;
+  movieShowtimeId: number | undefined;
 };
 
 const SeatSelectionModel = ({
@@ -18,7 +23,10 @@ const SeatSelectionModel = ({
   setBookingModalShow,
   unavailableSeats,
   numberOfSeats,
+  movieShowtimeId,
 }: SeatSelectionModelProps) => {
+  const token = getAuthToken();
+
   const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
 
   const remainingNumOfSeats = numberOfSeatsSelected - selectedSeats.length;
@@ -40,6 +48,30 @@ const SeatSelectionModel = ({
     } else {
       setSelectedSeats([]);
     }
+  };
+
+  const onProceedHandler = async () => {
+    let userId;
+    if (token) {
+      const tokenData: TokenData = jwtDecode(token);
+      userId = tokenData.sub.split(",")[0];
+    }
+    const body = {
+      movieShowtimeId,
+      userId: Number(userId),
+      seatIds: selectedSeats,
+    };
+    const res = await fetch("http://localhost:8080/seatBooking/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      mode: "cors",
+      body: JSON.stringify(body),
+    });
+
+    redirect("/");
   };
 
   return (
@@ -96,7 +128,7 @@ const SeatSelectionModel = ({
         >
           Back
         </Button>
-        <Button>Proceed</Button>
+        <Button onClick={onProceedHandler}>Proceed</Button>
       </Modal.Footer>
     </Modal>
   );

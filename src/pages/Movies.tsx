@@ -1,7 +1,6 @@
 import { Col, Form, Row } from "react-bootstrap";
 import { Movie } from "../App";
 import MovieCard from "../components/MovieCard";
-import ReactSelect from "react-select";
 import { useMemo, useState } from "react";
 
 type MoviesProps = {

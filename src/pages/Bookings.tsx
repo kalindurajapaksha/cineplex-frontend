@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  Button,
-  Col,
-  Image,
-  ListGroup,
-  Modal,
-  Row,
-  Stack,
-} from "react-bootstrap";
+import { Button, Col, Image, ListGroup, Modal, Row } from "react-bootstrap";
 import {
   ActionFunctionArgs,
   redirect,
@@ -86,7 +78,6 @@ export default Bookings;
 
 export const loader = async () => {
   const token = getAuthToken();
-  console.log("🚀 ~ file: Bookings.tsx:89 ~ loader ~ token:", token);
   if (token) {
     const tokenData: TokenData = jwtDecode(token);
     const userId = tokenData.sub.split(",")[0];
@@ -102,10 +93,9 @@ export const loader = async () => {
         mode: "cors",
       }
     );
-    console.log("🚀 ~ file: Bookings.tsx:102 ~ loader ~ res:", res);
+
     const data = await res.json();
-    console.log("🚀 ~ file: Bookings.tsx:102 ~ loader ~ data:", data);
-    console.log("first");
+
     return { bookings: data };
   }
   return { bookings: [] };
@@ -113,9 +103,17 @@ export const loader = async () => {
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const data = await request.text();
+  const token = getAuthToken();
   const res = await fetch(
     "http://localhost:8080/seatBooking/" + data.split("=")[1],
-    { method: request.method }
+    {
+      method: request.method,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      mode: "cors",
+    }
   );
   return redirect("/bookings");
 };

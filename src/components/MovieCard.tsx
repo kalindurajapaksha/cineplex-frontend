@@ -1,4 +1,4 @@
-import { Badge, Card, Stack } from "react-bootstrap";
+import { Card, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "./MovieCard.module.css";
 

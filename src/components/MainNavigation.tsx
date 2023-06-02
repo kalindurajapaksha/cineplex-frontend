@@ -1,12 +1,6 @@
 import jwtDecode from "jwt-decode";
-import { Button, Card, Col, Dropdown, Row } from "react-bootstrap";
-import {
-  Form,
-  Link,
-  NavLink,
-  useLocation,
-  useRouteLoaderData,
-} from "react-router-dom";
+import { Button, Col, Dropdown, Row } from "react-bootstrap";
+import { Form, Link, useLocation, useRouteLoaderData } from "react-router-dom";
 import { TokenData } from "../pages/Authentication";
 
 const MainNavigation = () => {

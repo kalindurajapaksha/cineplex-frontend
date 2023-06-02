@@ -1,37 +1,7 @@
-import {
-  LoaderFunctionArgs,
-  Navigate,
-  Outlet,
-  useOutletContext,
-  useParams,
-} from "react-router-dom";
+import { LoaderFunctionArgs, Outlet, useOutletContext } from "react-router-dom";
 import { MovieDetails } from "../App";
-import { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
 
 const MovieLayout = () => {
-  // const { id } = useParams();
-
-  // const [movieDetails, setMovieDetails] = useState<MovieDetails>();
-  // const [isLoading, setIsLoading] = useState(true);
-
-  // const movie = movies.find((m) => m.id === id);
-  // useEffect(() => {
-  //   const fetchMovieDetails = async (movieId: string) => {
-  //     setIsLoading(true);
-  //     const res = await fetch(`http://localhost:8080/movie/${movieId}`);
-  //     const data = await res.json();
-  //     console.log(data);
-  //     return data;
-  //   };
-  //   if (id) {
-  //     fetchMovieDetails(id).then((data) => {
-  //       setIsLoading(false);
-  //       setMovieDetails(data);
-  //     });
-  //   }
-  // }, [id]);
-  // if (movieDetails == null) return <Navigate to="/" replace />;
   return <Outlet />;
 };
 
