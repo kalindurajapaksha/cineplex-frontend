@@ -70,8 +70,8 @@ const SeatSelectionModel = ({
       mode: "cors",
       body: JSON.stringify(body),
     });
-
-    redirect("/");
+    setSeatSelectionModelShow(false);
+    return redirect("/");
   };
 
   return (

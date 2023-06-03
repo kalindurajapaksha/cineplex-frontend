@@ -98,7 +98,7 @@ export const loader = async () => {
 
     return { bookings: data };
   }
-  return { bookings: [] };
+  return redirect("/");
 };
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
