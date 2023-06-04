@@ -23,6 +23,7 @@ type AuthData = {
   lastName?: FormDataEntryValue | null;
   email: FormDataEntryValue | null;
   password: FormDataEntryValue | null;
+  type?: number;
 };
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
@@ -39,6 +40,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   if (mode === "signup") {
     authData["firstName"] = data.get("firstName");
     authData["lastName"] = data.get("lastName");
+    authData["type"] = 0;
   }
   const response = await fetch("http://localhost:8080/user/auth/" + mode, {
     method: "POST",
